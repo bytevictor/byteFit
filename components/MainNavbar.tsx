@@ -1,11 +1,11 @@
 "use client";
 
-import { Navbar, Drawer, Button } from "flowbite-react";
+import { Navbar, Drawer } from "flowbite-react";
 import { useState } from "react";
 import { useConfig } from "./hooks/ConfigProvider";
 import { DarkThemeToggle } from "flowbite-react";
 import Link from "next/link";
-import { SettingsIcon } from "lucide-react";
+import { Activity, Settings, X, Palette, Scale, BarChart3 } from "lucide-react";
 
 export function MainNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,103 +23,230 @@ export function MainNavbar() {
       <AnyNavbar
         fluid
         rounded
-        className="sticky top-0 z-40 border-b border-gray-200 bg-white/80 backdrop-blur-md dark:border-gray-700 dark:bg-gray-900/80"
+        className="sticky top-0 z-40 border-b border-gray-200/50 bg-white/70 backdrop-blur-xl dark:border-gray-700/50 dark:bg-gray-900/70"
       >
-        <Link href="#" className="flex items-center">
-          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-            byteFit
+        <Link href="#" className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 ring-1 ring-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:ring-blue-800/30">
+            <Activity className="h-6 w-6" />
+          </div>
+          <span className="self-center text-2xl font-bold tracking-tight whitespace-nowrap text-gray-900 dark:text-white">
+            {config.appName}
           </span>
         </Link>
-        <div className="flex md:order-2">
+        <div className="flex items-center gap-2 md:order-2">
           {/* Settings Button */}
-          <Button
-            color="light"
-            pill
-            size="sm"
+          <button
             onClick={() => setIsOpen(true)}
-            className="ml-2 p-2!"
+            className="inline-flex h-10 w-10 transform items-center justify-center rounded-lg text-gray-500 transition-all hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 focus:outline-none active:scale-95 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
           >
-            <svg
-              className="h-6 w-6 text-gray-800 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fillRule="evenodd"
-                d="M17 10v1.126c.367.095.714.24 1.032.428l.796-.797 1.415 1.415-.797.796c.188.318.333.665.428 1.032H21v2h-1.126c-.095.367-.24.714-.428 1.032l.797.796-1.415 1.415-.796-.797a3.979 3.979 0 0 1-1.032.428V20h-2v-1.126a3.977 3.977 0 0 1-1.032-.428l-.796.797-1.415-1.415.797-.796A3.975 3.975 0 0 1 12.126 16H11v-2h1.126c.095-.367.24-.714.428-1.032l-.797-.796 1.415-1.415.796.797A3.977 3.977 0 0 1 15 11.126V10h2Zm.406 3.578.016.016c.354.358.574.85.578 1.392v.028a2 2 0 0 1-3.409 1.406l-.01-.012a2 2 0 0 1 2.826-2.83ZM5 8a4 4 0 1 1 7.938.703 7.029 7.029 0 0 0-3.235 3.235A4 4 0 0 1 5 8Zm4.29 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h6.101A6.979 6.979 0 0 1 9 15c0-.695.101-1.366.29-2Z"
-                clipRule="evenodd"
-              />
-            </svg>
-
+            <Settings className="h-5 w-5" />
             <span className="sr-only">Settings</span>
-          </Button>
-          <DarkThemeToggle className="ml-2" />
+          </button>
+          <div className="mx-1 h-6 w-px bg-gray-200 dark:bg-gray-700"></div>
+          <DarkThemeToggle className="border-none! bg-transparent! p-2! text-gray-500 hover:bg-gray-100 focus:ring-0! dark:text-gray-400 dark:hover:bg-gray-700" />
         </div>
       </AnyNavbar>
 
-      <AnyDrawer open={isOpen} onClose={handleClose} position="right">
-        <div className="flex items-center justify-between px-4 py-4 dark:border-gray-700">
-          <h5 className="inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
-            Settings
-          </h5>
+      <AnyDrawer
+        open={isOpen}
+        onClose={handleClose}
+        position="right"
+        className="w-full max-w-[400px] shadow-2xl backdrop-blur-lg dark:bg-gray-900"
+      >
+        <div className="flex items-center justify-between border-b border-gray-100 px-6 py-6 dark:border-gray-800">
+          <div className="flex items-center gap-3">
+            <div className="rounded-lg bg-blue-50 p-2 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+              <Settings className="h-5 w-5" />
+            </div>
+            <h5 className="text-lg font-bold text-gray-900 dark:text-white">
+              Configuration
+            </h5>
+          </div>
           <button
             onClick={handleClose}
             type="button"
-            className="absolute top-2.5 right-2.5 inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
           >
-            <svg
-              aria-hidden="true"
-              className="h-5 w-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+            <X className="h-5 w-5" />
             <span className="sr-only">Close menu</span>
           </button>
         </div>
-        <div className="overflow-y-auto p-4">
-          <div className="flex flex-col gap-4">
+
+        <div className="overflow-y-auto px-6 py-6">
+          <div className="flex flex-col gap-8">
+            {/* Visual Section */}
             <div>
-              <label
-                htmlFor="weightColor"
-                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Weight Color
-              </label>
-              <input
-                type="color"
-                id="weightColor"
-                className="block h-10 w-full cursor-pointer rounded-lg border border-gray-200 bg-white p-1 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900"
-                value={config.weightColor}
-                onChange={(e) => updateConfig({ weightColor: e.target.value })}
-                title="Choose your color"
-              />
+              <div className="mb-4 flex items-center gap-2 text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                <Palette className="h-4 w-4" />
+                Visual Appearance
+              </div>
+              <div className="rounded-2xl border border-gray-100 bg-gray-50/50 p-4 dark:border-gray-800 dark:bg-gray-900/50">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      htmlFor="weightColor"
+                      className="mb-2 block text-xs font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Weight Metric
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="color"
+                        id="weightColor"
+                        className="h-10 w-12 cursor-pointer rounded-lg border-2 border-white shadow-sm dark:border-gray-700"
+                        value={config.weightColor}
+                        onChange={(e) =>
+                          updateConfig({ weightColor: e.target.value })
+                        }
+                      />
+                      <span className="font-mono text-xs text-gray-500 uppercase">
+                        {config.weightColor}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="fatColor"
+                      className="mb-2 block text-xs font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Fat Metric
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="color"
+                        id="fatColor"
+                        className="h-10 w-12 cursor-pointer rounded-lg border-2 border-white shadow-sm dark:border-gray-700"
+                        value={config.fatColor}
+                        onChange={(e) =>
+                          updateConfig({ fatColor: e.target.value })
+                        }
+                      />
+                      <span className="font-mono text-xs text-gray-500 uppercase">
+                        {config.fatColor}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 border-t border-gray-200/50 pt-4 dark:border-gray-700/50">
+                  <label className="relative flex cursor-pointer items-center">
+                    <input
+                      id="showWeightOnTop"
+                      type="checkbox"
+                      checked={config.showWeightOnTop}
+                      onChange={(e) =>
+                        updateConfig({ showWeightOnTop: e.target.checked })
+                      }
+                      className="peer sr-only"
+                    />
+                    <div className="peer h-6 w-11 rounded-full bg-gray-200 peer-checked:bg-blue-600 peer-focus:ring-4 peer-focus:ring-blue-300 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
+                    <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Raise Weight Layer
+                    </span>
+                  </label>
+                </div>
+              </div>
             </div>
+
+            {/* Scale Section */}
             <div>
-              <label
-                htmlFor="fatColor"
-                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Body Fat Color
-              </label>
-              <input
-                type="color"
-                id="fatColor"
-                className="block h-10 w-full cursor-pointer rounded-lg border border-gray-200 bg-white p-1 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900"
-                value={config.fatColor}
-                onChange={(e) => updateConfig({ fatColor: e.target.value })}
-                title="Choose your color"
-              />
+              <div className="mb-4 flex items-center gap-2 text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                <Scale className="h-4 w-4" />
+                Axis Scaling
+              </div>
+
+              <div className="space-y-6 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-800/40">
+                {/* Weight Axis Control */}
+                <div>
+                  <label className="mb-3 block flex items-center justify-between text-sm font-medium text-gray-900 dark:text-white">
+                    <span>Weight Bounds (kg)</span>
+                    <span className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500 dark:bg-gray-800">
+                      Primary Axis
+                    </span>
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-full">
+                      <input
+                        type="number"
+                        id="minWeight"
+                        placeholder="Min"
+                        className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 pl-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                        value={config.minWeight}
+                        onChange={(e) =>
+                          updateConfig({ minWeight: Number(e.target.value) })
+                        }
+                      />
+                      <span className="absolute top-2.5 right-3 text-xs text-gray-400">
+                        min
+                      </span>
+                    </div>
+                    <div className="text-gray-400">-</div>
+                    <div className="relative w-full">
+                      <input
+                        type="number"
+                        id="maxWeight"
+                        placeholder="Max"
+                        className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 pl-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                        value={config.maxWeight}
+                        onChange={(e) =>
+                          updateConfig({ maxWeight: Number(e.target.value) })
+                        }
+                      />
+                      <span className="absolute top-2.5 right-3 text-xs text-gray-400">
+                        max
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Fat Axis Control */}
+                <div>
+                  <label className="mb-3 block flex items-center justify-between text-sm font-medium text-gray-900 dark:text-white">
+                    <span>Body Fat Bounds (%)</span>
+                    <span className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500 dark:bg-gray-800">
+                      Secondary Axis
+                    </span>
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-full">
+                      <input
+                        type="number"
+                        id="minFat"
+                        placeholder="Min"
+                        className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 pl-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                        value={config.minFat}
+                        onChange={(e) =>
+                          updateConfig({ minFat: Number(e.target.value) })
+                        }
+                      />
+                      <span className="absolute top-2.5 right-3 text-xs text-gray-400">
+                        min
+                      </span>
+                    </div>
+                    <div className="text-gray-400">-</div>
+                    <div className="relative w-full">
+                      <input
+                        type="number"
+                        id="maxFat"
+                        placeholder="Max"
+                        className="block w-full rounded-lg border-gray-300 bg-gray-50 p-2.5 pl-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                        value={config.maxFat}
+                        onChange={(e) =>
+                          updateConfig({ maxFat: Number(e.target.value) })
+                        }
+                      />
+                      <span className="absolute top-2.5 right-3 text-xs text-gray-400">
+                        max
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-center justify-center rounded-xl bg-gray-50 p-4 dark:bg-gray-800/50">
+              <p className="text-center text-xs text-gray-400">
+                ByteFit App v{config.version}
+              </p>
             </div>
           </div>
         </div>

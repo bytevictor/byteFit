@@ -4,14 +4,28 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 // Default configuration values
 const defaultConfig: AppConfig = {
+  appName: "byteFit",
+  version: "1.0.0",
   weightColor: "#3b82f6",
   fatColor: "#ff8c00",
+  minWeight: 60,
+  maxWeight: 120,
+  minFat: 8,
+  maxFat: 30,
+  showWeightOnTop: true,
 };
 
 // Define the shape of your configuration configuration
 export interface AppConfig {
+  appName: string;
+  version: string;
   weightColor: string;
   fatColor: string;
+  minWeight: number;
+  maxWeight: number;
+  minFat: number;
+  maxFat: number;
+  showWeightOnTop: boolean;
 }
 
 interface ConfigContextType {

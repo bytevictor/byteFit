@@ -17,7 +17,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-white px-4 py-24 dark:bg-gray-900">
+    <main className="flex min-h-[calc(100vh-3.8rem)] flex-col items-center justify-center bg-white px-4 py-24 dark:bg-gray-900">
       <div className="absolute inset-0 size-full">
         <div className="relative h-full w-full select-none">
           <Image

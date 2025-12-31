@@ -20,18 +20,6 @@ interface WeightFatChartProps {
 export function WeightFatChart({ data }: WeightFatChartProps) {
   const { config } = useConfig();
 
-  // Calculate min/max for better axis scaling
-  const weights = data
-    .map((d) => d.weight)
-    .filter((w) => w !== null) as number[];
-  const fats = data.map((d) => d.fatRate).filter((f) => f !== null) as number[];
-
-  const minWeight = Math.floor(Math.min(...weights) - 1);
-  const maxWeight = Math.ceil(Math.max(...weights) + 1);
-
-  const minFat = fats.length > 0 ? Math.floor(Math.min(...fats) - 1) : 0;
-  const maxFat = fats.length > 0 ? Math.ceil(Math.max(...fats) + 1) : 40;
-
   return (
     <div className="h-[500px] w-full rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <div className="mb-6">
@@ -93,7 +81,7 @@ export function WeightFatChart({ data }: WeightFatChartProps) {
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            domain={[minWeight, maxWeight]}
+            domain={[config.minWeight, config.maxWeight]}
             unit="kg"
             className="text-xs font-medium text-gray-500 dark:text-gray-400"
           />
@@ -105,7 +93,7 @@ export function WeightFatChart({ data }: WeightFatChartProps) {
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            domain={[minFat, maxFat]}
+            domain={[config.minFat, config.maxFat]}
             unit="%"
             className="text-xs font-medium text-gray-500 dark:text-gray-400"
           />
@@ -123,27 +111,53 @@ export function WeightFatChart({ data }: WeightFatChartProps) {
 
           <Legend wrapperStyle={{ paddingTop: "20px" }} />
 
-          <Area
-            yAxisId="left"
-            type="monotone"
-            dataKey="weight"
-            name="Peso (kg)"
-            stroke={config.weightColor}
-            fillOpacity={1}
-            fill="url(#colorWeight)"
-            strokeWidth={2}
-          />
-
-          <Area
-            yAxisId="right"
-            type="monotone"
-            dataKey="fatRate"
-            name="Grasa Corporal (%)"
-            stroke={config.fatColor}
-            fillOpacity={1}
-            fill="url(#colorFat)"
-            strokeWidth={2}
-          />
+          {config.showWeightOnTop ? (
+            <>
+              <Area
+                yAxisId="right"
+                type="monotone"
+                dataKey="fatRate"
+                name="Grasa Corporal (%)"
+                stroke={config.fatColor}
+                fillOpacity={1}
+                fill="url(#colorFat)"
+                strokeWidth={2}
+              />
+              <Area
+                yAxisId="left"
+                type="monotone"
+                dataKey="weight"
+                name="Peso (kg)"
+                stroke={config.weightColor}
+                fillOpacity={1}
+                fill="url(#colorWeight)"
+                strokeWidth={2}
+              />
+            </>
+          ) : (
+            <>
+              <Area
+                yAxisId="left"
+                type="monotone"
+                dataKey="weight"
+                name="Peso (kg)"
+                stroke={config.weightColor}
+                fillOpacity={1}
+                fill="url(#colorWeight)"
+                strokeWidth={2}
+              />
+              <Area
+                yAxisId="right"
+                type="monotone"
+                dataKey="fatRate"
+                name="Grasa Corporal (%)"
+                stroke={config.fatColor}
+                fillOpacity={1}
+                fill="url(#colorFat)"
+                strokeWidth={2}
+              />
+            </>
+          )}
         </AreaChart>
       </ResponsiveContainer>
     </div>
