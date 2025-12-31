@@ -11,12 +11,15 @@ import {
   Legend,
 } from "recharts";
 import { BodyData } from "../lib/csvParser";
+import { useConfig } from "./ConfigProvider";
 
 interface WeightFatChartProps {
   data: BodyData[];
 }
 
 export function WeightFatChart({ data }: WeightFatChartProps) {
+  const { config } = useConfig();
+
   // Calculate min/max for better axis scaling
   const weights = data
     .map((d) => d.weight)
@@ -52,12 +55,20 @@ export function WeightFatChart({ data }: WeightFatChartProps) {
         >
           <defs>
             <linearGradient id="colorWeight" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+              <stop
+                offset="5%"
+                stopColor={config.weightColor}
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor={config.weightColor}
+                stopOpacity={0}
+              />
             </linearGradient>
             <linearGradient id="colorFat" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+              <stop offset="5%" stopColor={config.fatColor} stopOpacity={0.8} />
+              <stop offset="95%" stopColor={config.fatColor} stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid
@@ -117,7 +128,7 @@ export function WeightFatChart({ data }: WeightFatChartProps) {
             type="monotone"
             dataKey="weight"
             name="Peso (kg)"
-            stroke="#3b82f6"
+            stroke={config.weightColor}
             fillOpacity={1}
             fill="url(#colorWeight)"
             strokeWidth={2}
@@ -128,7 +139,7 @@ export function WeightFatChart({ data }: WeightFatChartProps) {
             type="monotone"
             dataKey="fatRate"
             name="Grasa Corporal (%)"
-            stroke="#10b981"
+            stroke={config.fatColor}
             fillOpacity={1}
             fill="url(#colorFat)"
             strokeWidth={2}

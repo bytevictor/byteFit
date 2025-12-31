@@ -36,9 +36,6 @@ export default async function Home() {
           />
         </div>
       </div>
-      <div className="absolute top-4 right-4 z-50">
-        <DarkThemeToggle />
-      </div>
 
       <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center gap-12">
         <div className="w-full">
