@@ -22,8 +22,7 @@ export function MainNavbar() {
     <>
       <AnyNavbar
         fluid
-        rounded
-        className="sticky top-0 z-40 border-b border-gray-200/50 bg-white/70 backdrop-blur-xl dark:border-gray-700/50 dark:bg-gray-900/70"
+        className="sticky top-0 z-40 border-b border-gray-200/50 bg-blue-50 backdrop-blur-xl dark:border-gray-700/50 dark:bg-gray-900/70"
       >
         <Link href="#" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 ring-1 ring-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:ring-blue-800/30">
@@ -34,6 +33,8 @@ export function MainNavbar() {
           </span>
         </Link>
         <div className="flex items-center gap-2 md:order-2">
+          <DarkThemeToggle className="text-gray-500 hover:bg-gray-100 focus:ring-0! dark:text-gray-400 dark:hover:bg-gray-700" />
+          <div className="mx-1 h-6 w-px bg-gray-200 dark:bg-gray-700"></div>
           {/* Settings Button */}
           <button
             onClick={() => setIsOpen(true)}
@@ -42,8 +43,6 @@ export function MainNavbar() {
             <Settings className="h-5 w-5" />
             <span className="sr-only">Settings</span>
           </button>
-          <div className="mx-1 h-6 w-px bg-gray-200 dark:bg-gray-700"></div>
-          <DarkThemeToggle className="border-none! bg-transparent! p-2! text-gray-500 hover:bg-gray-100 focus:ring-0! dark:text-gray-400 dark:hover:bg-gray-700" />
         </div>
       </AnyNavbar>
 
