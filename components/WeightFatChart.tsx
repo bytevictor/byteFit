@@ -11,7 +11,7 @@ import {
   Legend,
 } from "recharts";
 import { BodyData } from "../lib/csvParser";
-import { useConfig } from "./ConfigProvider";
+import { useConfig } from "./hooks/ConfigProvider";
 
 interface WeightFatChartProps {
   data: BodyData[];

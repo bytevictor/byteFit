@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeInit } from "../.flowbite-react/init";
 import "./globals.css";
-import { ConfigProvider } from "../components/ConfigProvider";
+import { ConfigProvider } from "../components/hooks/ConfigProvider";
 import { MainNavbar } from "../components/MainNavbar";
 
 const geistSans = Geist({

@@ -2,7 +2,7 @@
 
 import { Navbar, Drawer, Button } from "flowbite-react";
 import { useState } from "react";
-import { useConfig } from "./ConfigProvider";
+import { useConfig } from "./hooks/ConfigProvider";
 import { DarkThemeToggle } from "flowbite-react";
 import Link from "next/link";
 import { SettingsIcon } from "lucide-react";
